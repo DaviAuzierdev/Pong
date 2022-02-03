@@ -10,18 +10,21 @@ public class Pong extends Canvas implements Runnable, KeyListener {
     static JFrame frame;
     public boolean isRunning;
     public Thread thread;
-    public Enemy enemy;
+    public static Enemy enemy;
     public static final int WIDTH = 240;
     public static final int HEIGHT = 160;
     public static final int SCALE = 3;
     public BufferedImage image;
-    Player player;
+    static Player player;
+    static Ball ball;
     public Pong(){
         addKeyListener(this);
         setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
         image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
         player = new Player(0,(HEIGHT/2) - 40);
+        ball = new Ball(WIDTH/2, HEIGHT/2);
         enemy = new Enemy(WIDTH-11, HEIGHT/2);
+
     }
     public synchronized void start(){
         thread = new Thread(this);
@@ -51,6 +54,10 @@ public class Pong extends Canvas implements Runnable, KeyListener {
     }
     public void tick(){
         player.tick();
+        ball.tick();
+        enemy.tick();
+
+
     }
     public void render(){
         BufferStrategy bs = getBufferStrategy();
@@ -62,6 +69,7 @@ public class Pong extends Canvas implements Runnable, KeyListener {
         g.setColor(Color.black);
         g.fillRect(0,0,WIDTH, HEIGHT);
         player.render(g);
+        ball.render(g);
         enemy.render(g);
 
         g.dispose();

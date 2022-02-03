@@ -9,7 +9,7 @@ public class Enemy extends Player {
 
   }
   public void tick(){
-
+    y+=(Pong.ball.y - y - 6) *0.07;
   }
   public void render(Graphics graphics){
     graphics.setColor(Color.white);

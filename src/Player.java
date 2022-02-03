@@ -24,6 +24,9 @@ public class Player extends Rectangle {
         if(y < 0){
            y = 0;
         }
+
+
+
     }
 
     public void render(Graphics g) {
